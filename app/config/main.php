@@ -9,6 +9,7 @@ return [
     'controllers_path' => $appPath . DIRECTORY_SEPARATOR . 'app' . DIRECTORY_SEPARATOR . 'controllers',
     'db' => [
         'local' => [
+            'type' => pgsql::class,
             'host' => '127.0.0.1', // 'localhost'
             'port' => 5432,
             'login' => 'skinner',

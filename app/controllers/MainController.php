@@ -6,9 +6,19 @@ class MainController extends controller
 
     public function actionIndex()
     {
-        $users = $this->getModel('users')->getUsers();
-        $content = $this->renderTemplate('usersList', ['users' => $users]);
-        echo $this->renderPage(['CONTENT' => $content]);
+        $u = $this->getModel('users')->getUsers();
+        
+        $html = '<table>';
+        foreach ($u as $user) {
+            $html .= '<tr>';
+            $html .= '<td><a href="/index.php?controller=main&action=delete&id=' . $user['id'] . '">Удалить</a></td>';
+            $html .= '<td>' . $user['login'] . '</td>';
+            $html .= '<td>' . $user['password'] . '</td>';
+            $html .= '</tr>';
+        }
+        $html .= '</table>';
+        
+        echo $this->renderPage(['CONTENT' => $html]);
     }
     
     public function actionDelete()
