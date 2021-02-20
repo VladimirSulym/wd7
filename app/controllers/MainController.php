@@ -27,15 +27,38 @@ class MainController extends controller
         header('Location: /index.php?controller=main&action=index');
     }
     
+    public function actionCatalog()
+    {
+        
+        echo $this->renderPage(['CONTENT' => $this->renderTemplate('list', []), 'MENU' => $this->renderTemplate('menu', [])]);
+        echo json_encode([
+            'MENU' => $this->renderTemplate('menu'),
+            'CONTENT' => $this->renderTemplate('list')
+        ]);
+    }
+    
     public function actionRest()
     {
+        
         //$this->layout = 'test';
         //$rest = $this->renderPage();
         //$this->layout = 'index';
         //$this->templatesDir = 'layouts';
         //$this->templatesDir = 'layouts';
-        $content = $this->renderAll('main', 'usersList', ['zzz' => __METHOD__]);
+        //$content = $this->renderAll('main', 'usersList', ['zzz' => __METHOD__]);
+        $model = $this->getModel('users');
         //$this->layout = 'test';
-        echo $this->renderPage(['CONTENT' => $content]);
+        $popup = $model->addedToCart() ? '' : 'Не Добавлено';
+        echo $this->renderPage(['CONTENT' => '', 'popup' => $popup]);
+    }
+    
+    public function actionRestAction()
+    {
+        $content = $this->renderAll('main', 'usersList', ['zzz' => __METHOD__]);
+        echo json_encode(['content' => $content]);
+        die();
+        $key = request::getInstance()->post['key'];
+        $response = $key < 0.5 ? 'Не угадал' : '';
+        echo json_encode(['success' => 1, 'popup' => $key]);
     }
 }

@@ -12,6 +12,11 @@ class controller
         
     }
 
+    public function response()
+    {
+        //echo '';
+    }
+    
     public function getModel($modelName, $isNew = false)
     {
         if (!isset($this->models[$modelName])) {

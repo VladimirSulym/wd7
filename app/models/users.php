@@ -2,6 +2,11 @@
 
 class users extends model
 {
+    public function addedToCart()
+    {
+        return false;
+    }
+
     public function __construct()
     {
         

@@ -62,6 +62,7 @@ class core
         }
 
         $controller->$actionName();
+        $controller->response();
         return true;
     }
 }

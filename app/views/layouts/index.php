@@ -34,12 +34,40 @@
                 background: #c0c0c0;
                 float: right;
             }
+            #popup {
+                border: 1px solid red;
+                padding: 10px;
+                position: absolute;
+                top: 10px;
+                left:10px;
+                z-index: 1000;
+                background: #fcd;
+                display: none;
+            }
         </style>
         <script src="jquery.js"></script>
     </head>
     <body>
+        <div id="popup">
+        </div>
         <div id="header">
-            asdas
+            <script>
+                function sendAction()
+                {
+                    var key = Math.random();
+                    console.log(key);
+                    $.ajax({
+                        url: '/?controller=main&action=restAction',
+                        data: {key: key},
+                        method: 'POST',
+                        dataType: 'JSON',
+                        success: function (r) {
+                            $('#pageContent').html(r.content);
+                        }
+                    });
+                }
+            </script>
+            <input type="button" onclick="sendAction();">br /<>
         </div>
         <div id="pageBlock">
             <div id="leftMenu">
