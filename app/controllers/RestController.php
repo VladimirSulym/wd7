@@ -54,9 +54,10 @@ class RestController extends controller
     // PUT /?controller=rest&id=10 | request payload: {"model":"ea-99"}
     public function actionUpdate()
     {
-        $data = getRequestPayload();
+        $data = request::getInstance()->requestPayload();
         $data = json_decode($data, true);
-        $this->db[$_GET['id']] = array_merge($this->db[$_GET['id']], $data);
+        $this->db[request::getInstance()->get['id']] = array_merge($this->db[request::getInstance()->get['id']], $data);
+        echo json_encode($this->db[request::getInstance()->get['id']]);
     }
     
     // DELETE   /rest/10
@@ -64,5 +65,6 @@ class RestController extends controller
     public function actionDelete()
     {
         unset($this->db[$_GET['id']]);
+        echo json_encode($this->db);
     }
 }

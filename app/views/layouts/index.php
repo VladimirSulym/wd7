@@ -35,6 +35,7 @@
                 float: right;
             }
         </style>
+        <script src="jquery.js"></script>
     </head>
     <body>
         <div id="header">
@@ -42,11 +43,6 @@
         </div>
         <div id="pageBlock">
             <div id="leftMenu">
-                <!--
-                <?php foreach ($categories as $category ) { ?>
-                    <a href="/index.php?controller=main&action=index&category=<?php echo $category['link']; ?>"><?php echo $category['name']; ?></a><br />
-                <?php } ?>
-                -->
             </div>
             <div id="pageContent">
                 <?php echo $CONTENT; ?>

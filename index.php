@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * @todo comment my code
+ */
+
 $config = include __DIR__ . DIRECTORY_SEPARATOR . 'app' . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR . 'main.php';
 
 if (true) {

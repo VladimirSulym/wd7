@@ -1,3 +1,6 @@
+asdasdasdasdasdclldhsf udhuifusdshsf usdfhsbdf
+<?php echo $zzz; ?>
+<?php echo $this->renderAll('layouts', 'test', []); ?>
 <table>
     <tr>
         <td>

@@ -24,6 +24,8 @@ class request
 
     private function __construct()
     {
+        // /users/12 GET
+        // /users/   GET
         /*
         if (!empty($_FILES)) {
             $fileLoader = new fileLoader();
@@ -37,7 +39,7 @@ class request
         $this->server = $_SERVER;
 
         $this->controller = $this->get['controller'] ?? 'site';
-        $this->action = $this->get['action'] ?? 'index';
+        $this->action = $this->getAction();
         
         $this->controller = str_replace(chr(0), '', $this->controller);
         $this->action = str_replace(chr(0), '', $this->action);
@@ -46,6 +48,30 @@ class request
         $this->setRequestPayload();
 
         unset($this->get['controller'], $this->get['action'], $this->post['submit']);
+    }
+    
+    private function getAction()
+    {
+        if (strtolower($this->controller) != 'rest') {
+            return $this->get['action'] ?? 'index';
+        }
+
+        $name = '';
+        switch (strtolower($_SERVER['REQUEST_METHOD'])) {
+            case 'get':
+                $name = isset($this->get['id']) ? 'view' : 'get';
+                break;
+            case 'post':
+                $name = 'create';
+                break;
+            case 'put':
+                $name = 'update';
+                break;
+            case 'delete':
+                $name = 'delete';
+                break;
+        }
+        return $name;
     }
     
     private function setRequestPayload()

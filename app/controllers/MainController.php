@@ -26,4 +26,16 @@ class MainController extends controller
         $this->getModel('users')->deleteUser(request::getInstance()->get['id']);
         header('Location: /index.php?controller=main&action=index');
     }
+    
+    public function actionRest()
+    {
+        //$this->layout = 'test';
+        //$rest = $this->renderPage();
+        //$this->layout = 'index';
+        //$this->templatesDir = 'layouts';
+        //$this->templatesDir = 'layouts';
+        $content = $this->renderAll('main', 'usersList', ['zzz' => __METHOD__]);
+        //$this->layout = 'test';
+        echo $this->renderPage(['CONTENT' => $content]);
+    }
 }

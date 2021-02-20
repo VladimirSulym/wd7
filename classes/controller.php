@@ -24,11 +24,24 @@ class controller
         return $isNew ? (new $modelName) : $this->models[$modelName];
     }
 
+    public function renderTemplate($templateName, $data = [])
+    {
+        if (empty($this->templatesDir)) {
+            $this->templatesDir = request::getInstance()->controller;
+        }
+        return $this->renderAll($this->templatesDir, $templateName, $data);
+    }
+
     public function renderPage($data = [])
     {
-        $___PATH_TO_TEMPLATE_0014531____ = core::$config['app_path'] . DS . 'app' . DS . 'views' . DS . 'layouts' . DS . $this->layout . '.php';
+        return $this->renderAll('layouts', $this->layout, $data);
+    }
+    
+    protected function renderAll($dir, $template, $data = [])
+    {
+        $___PATH_TO_TEMPLATE_0014531____ = core::$config['app_path'] . DS . 'app' . DS . 'views' . DS . $dir . DS . $template . '.php';
         if (!file_exists($___PATH_TO_TEMPLATE_0014531____)) {
-            throw new Exception('Template ' . $this->layout . ' not found');
+            throw new Exception('Template ' . $dir . '/' . $template . ' not found');
         }
         extract($data);
         ob_start();

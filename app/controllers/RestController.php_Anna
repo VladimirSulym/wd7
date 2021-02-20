@@ -1,0 +1,41 @@
+<?php
+
+class RestController extends controller {
+
+    protected $layout = 'rest';
+    public static $restData = [
+        'rest' => [
+            ['id'=>1, 'name'=>'Tolya', 'age'=>39],
+            ['id'=>2, 'name'=>'Valya', 'age'=>11],
+            ['id'=>3, 'name'=>'Yura', 'age'=>25]
+        ]];
+    
+    public function actionIndex()
+    {
+        $method = explode('::', __METHOD__ . ucfirst(strtolower($_SERVER['REQUEST_METHOD'])))[1];
+        $this->$method();
+    }
+    
+    public function actionIndexGet(){
+        $layout = $this->renderPage(self::$restData);
+        echo $layout;
+    }
+    
+    public function actionIndexPost(){
+        self::$restData['rest'][]=[];
+        end(self::$restData['rest']);
+        $key = key(self::$restData['rest']);
+        self::$restData['rest'][$key]['id'] = $key;
+        self::$restData['rest'][$key]['name'] = $_POST['name'];
+        self::$restData['rest'][$key]['age'] = $_POST['age'];
+        //print_r(self::$restData['rest']);
+        //header('Location: /wd7.php?controller=rest&action=index'); //почему не перерисовывается страница? не правильный адрес?
+    }
+    
+    public function actionIndexPut(){
+        
+    }
+    public function actionIndexDelete(){
+        echo "I'm deleted";
+    }
+}
