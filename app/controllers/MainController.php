@@ -6,6 +6,14 @@ class MainController extends controller
 
     public function actionIndex()
     {
+        $model = $this->getModel('users');
+        $queryBuilder = $model->queryBuilder;
+        
+        //
+        $res = $queryBuilder->where('id>2')->from('users')->select('*')->query();
+        echo '<pre>';
+        print_r($res);
+        /*
         $u = $this->getModel('users')->getUsers();
         
         $html = '<table>';
@@ -19,6 +27,7 @@ class MainController extends controller
         $html .= '</table>';
         
         echo $this->renderPage(['CONTENT' => $html]);
+        /**/
     }
     
     public function actionDelete()
