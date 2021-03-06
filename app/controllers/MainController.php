@@ -6,13 +6,14 @@ class MainController extends controller
 
     public function actionIndex()
     {
-        $model = $this->getModel('users');
-        $queryBuilder = $model->queryBuilder;
-        
-        //
-        $res = $queryBuilder->where('id>2')->from('users')->select('*')->query();
-        echo '<pre>';
-        print_r($res);
+        //$html = '<script>alert("aaa");</script>';
+        $html = '';
+        echo $this->renderPage(['CONTENT'=> $html]);
+        //sleep(5);
+        echo $this->renderPage(['CONTENT'=> null]);
+
+        $html = $this->renderTemplate('usersList');
+        echo $this->renderPage(['CONTENT' => $html]);
         /*
         $u = $this->getModel('users')->getUsers();
         
@@ -48,7 +49,7 @@ class MainController extends controller
     
     public function actionRest()
     {
-        
+        echo json_encode(['success' => 1]);
         //$this->layout = 'test';
         //$rest = $this->renderPage();
         //$this->layout = 'index';
@@ -63,6 +64,7 @@ class MainController extends controller
     
     public function actionRestAction()
     {
+        echo json_encode(['success' => 1]);die();
         $content = $this->renderAll('main', 'usersList', ['zzz' => __METHOD__]);
         echo json_encode(['content' => $content]);
         die();

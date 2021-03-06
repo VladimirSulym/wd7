@@ -39,34 +39,57 @@
                 padding: 10px;
                 position: absolute;
                 top: 10px;
-                left:10px;
+                right:10px;
                 z-index: 1000;
                 background: #fcd;
                 display: none;
             }
         </style>
         <script src="jquery.js"></script>
+        <script>
+            let socket = new WebSocket('ws://127.0.0.1:38100');
+        </script>
+        <script>
+            //let socket = new WebSocket('ws://127.0.0.1:38100');
+            $(function () {
+                var status = $('#popup').css('display');
+                //if (status == 'block') {
+                    setInterval(function () {
+                        console.log('AAA');
+                        $('#popup').css('display', 'none');
+                        $('#popup').html('');
+                    }, 3000);
+                //}
+            });
+            /*
+            function sendAction()
+            {
+                $.ajax({
+                    url: '/?controller=main&action=restAction',
+                    method: 'POST',
+                    dataType: 'JSON',
+                    success: function (r) {
+                        $('#popup').css('display', 'block');
+                        $('#popup').html('ураааа!!!');
+                        setInterval(function () {
+                            $('#popup').css('display', 'none');
+                            $('#popup').html('');
+                        }, 10000);
+                        //$('#pageContent').html(r.content);
+                    }
+                });
+            }
+            /**/
+        </script>
     </head>
     <body>
-        <div id="popup">
-        </div>
+        <?php
+        $display = isset($_GET['start']) && $_GET['start'] == 1 ? 'block' : 'none';
+        ?>
+        <div style="display: <?php echo $display; ?>;" id="popup">asdasd</div>
+        
         <div id="header">
-            <script>
-                function sendAction()
-                {
-                    var key = Math.random();
-                    console.log(key);
-                    $.ajax({
-                        url: '/?controller=main&action=restAction',
-                        data: {key: key},
-                        method: 'POST',
-                        dataType: 'JSON',
-                        success: function (r) {
-                            $('#pageContent').html(r.content);
-                        }
-                    });
-                }
-            </script>
+            
             <input type="button" onclick="sendAction();">br /<>
         </div>
         <div id="pageBlock">

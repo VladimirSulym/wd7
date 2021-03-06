@@ -44,7 +44,6 @@ class core
     {
         $controllerName = ucfirst(strtolower($controller)) . 'Controller';
         $actionName     = 'action' . ucfirst(strtolower($action));
-
         if (!file_exists(self::$config['controllers_path'] . DIRECTORY_SEPARATOR . $controllerName . '.php')) {
             throw new httpException('Controller ' . $controller . '  file not exists', 404);
         }

@@ -1,5 +1,9 @@
-<?php
+<script>
+            let socket = new WebSocket('ws://127.0.0.1:38100');
+</script>
 
+<?php
+die();
 /**
  * @todo comment my code
  */
