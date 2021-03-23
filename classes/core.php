@@ -29,6 +29,12 @@ class core
         self::$config = $config;
     }
 
+    public static function url($controller, $action)
+    {
+        $url = '/index.php?controller=' . $controller . '&action=' . $action;
+        return $url;
+    }
+    
     public function run()
     {
         try {

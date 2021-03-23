@@ -1,12 +1,4 @@
-<script>
-            let socket = new WebSocket('ws://127.0.0.1:38100');
-</script>
-
 <?php
-die();
-/**
- * @todo comment my code
- */
 
 $config = include __DIR__ . DIRECTORY_SEPARATOR . 'app' . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR . 'main.php';
 
@@ -19,6 +11,33 @@ include 'classes/core.php';
 
 $app = new core($config);
 $app->run();
+/*
+class a
+{
+    public function doWork($string)
+    {
+        if ($string[strlen($string)-1] == '1') {
+            return md5($string. '-');
+        }
+        return md5($string);
+    }
+}
+
+class test extends a
+{
+    public function testDoWork()
+    {
+        $start = 'admin1';
+        if ('21232f297a57a5a743894a0e4a801fc3' !== $this->doWork('admin')) {
+            die("TEST FAILED\n");
+        }
+        die("TEST OK\n");
+    }
+}
+$test = new test();
+$test->testDoWork();
+die();
+
 
 /**/
 //include 'app/controllers/MainController.php';
@@ -415,3 +434,35 @@ print_r($fileLoader->change());
 //echo $t2->testB();
 //echo "\n";
 //print_r($t2);
+
+/*
+$mc = new Memcache();
+$mc->connect('127.0.0.1', 11211);
+
+$key = 'test0';
+$ts = microtime(true);
+
+if (!($a = $mc->get($key))) {
+    $a = 'b';
+    for ($i = 0; $i < 8000000; $i++) {
+        $a = sha1($a);
+    }
+
+    $mc->set($key, ($a));
+}
+
+echo $a . ' - ' . (microtime(true) - $ts) . "\n";
+/*
+$categoryId = 10;
+$key = 'category_template_' . ($categoryId);
+if (($data = $mc->get($key)) === false) {
+    echo "cached\n";
+    $data = '100';
+    //$data = 'select * from category where id=' . $categoryId;
+    $mc->set($key, $data);
+}
+print_r($mc->getStats());
+print_r($data);echo "\n";
+die();
+///return $data;
+/**/
